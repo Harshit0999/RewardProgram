@@ -1,0 +1,23 @@
+Reward Points Calculation API
+
+Overview - 
+This API calculates reward points earned by customers based on their purchase transactions. The reward logic awards:
+
+2 points for every dollar spent over $100 in a single transaction.
+1 point for every dollar spent between $50 and $100 in a single transaction.
+
+Database Setup
+The database is prepopulated with sample customer and transaction data using the data.sql file located in the src/main/resources directory. This demonstrates the functionality with ready-to-use data for testing purposes.
+
+Endpoint: POST /rewards
+Description: Calculates rewards for a specific customer with customer ID
+
+Sample output - 
+{
+  "customerId": 1,
+  "totalPoints": 165,
+  "monthlyBreakdown": {
+    "2023-01": 120,
+    "2023-02": 45
+  }
+}
