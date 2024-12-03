@@ -12,6 +12,12 @@ public class CustomerData {
 
     private String customerName;
 
+    public CustomerData() {
+    }
+
+    public CustomerData(long l, String customerName) {
+    }
+
     public String getCustomerName() {
         return customerName;
     }
