@@ -19,6 +19,12 @@ public class TransactionData {
 
     private double amountOfTransaction;
 
+    public TransactionData() {
+    }
+
+    public TransactionData(long l, CustomerData customer, LocalDate of, double v) {
+    }
+
     public CustomerData getCustomerData() {
         return customerData;
     }
