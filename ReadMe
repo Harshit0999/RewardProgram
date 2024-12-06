@@ -1,23 +1,46 @@
-Reward Points Calculation API
+Rewards Program API 
+This Spring Boot application provides a RESTful API to calculate and retrieve reward points earned by customers based on their purchases over a three-month period. The reward calculation is as follows:
 
-Overview - 
-This API calculates reward points earned by customers based on their purchase transactions. The reward logic awards:
+Reward Points Logic:
 
-2 points for every dollar spent over $100 in a single transaction.
-1 point for every dollar spent between $50 and $100 in a single transaction.
+2 points are awarded for every dollar spent over $100 in a single transaction.
+1 point is awarded for every dollar spent between $50 and $100 in a single transaction.
+Example: A transaction of $120 earns 90 points (2 × $20 + 1 × $50).
+Features:
 
-Database Setup
-The database is prepopulated with sample customer and transaction data using the data.sql file located in the src/main/resources directory. This demonstrates the functionality with ready-to-use data for testing purposes.
+Calculates monthly reward points for each customer based on their transactions.
+Computes the total reward points earned over the three-month period.
+Includes a REST endpoint to retrieve the reward details for a specific customer.
+Sample Data:
 
-Endpoint: POST /rewards
-Description: Calculates rewards for a specific customer with customer ID
+Customer: Harshit Gupta
+Transactions:
+2024-08-01 - $120.00
+2024-09-01 - $75.00
+2024-10-01 - $150.00
+2024-08-15 - $95.00
+2024-09-20 - $130.00
+REST Endpoint:
 
-Sample output - 
+URL: /rewards/{customerId}
+Method: GET
+Response:
+json
+Copy code
 {
-  "customerId": 1,
-  "totalPoints": 165,
-  "monthlyBreakdown": {
-    "2023-01": 120,
-    "2023-02": 45
-  }
+    "customer": "Harshit Gupta",
+    "monthlyRewards": {
+        "AUGUST": 135,
+        "SEPTEMBER": 155,
+        "OCTOBER": 240
+    },
+    "totalRewards": 530
 }
+Technology Stack:
+
+-Java, Spring Boot, Spring Data JPA
+-PostgreSQL database
+-Global exception handling for robust API behavior.
+
+
+This application demonstrates the ability to calculate and expose customer reward points using Spring Boot while utilizing a structured database and RESTful principles.
