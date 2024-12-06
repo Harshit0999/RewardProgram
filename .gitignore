@@ -1,37 +1,55 @@
-HELP.md
-.gradle
+# Gradle build files
+.gradle/
 build/
+
+# Gradle Wrapper files
 !gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
-
-### IntelliJ IDEA ###
-.idea
-*.iws
+# Ignore local environment files
+.gradle/
+gradle-app.setting
+.idea/
 *.iml
+
+# Ignore IntelliJ project files
 *.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
+*.iws
+*.idea/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+# Eclipse files
+*.classpath
+*.project
+*.settings/
 
-### VS Code ###
+# Maven's build directory
+target/
+
+# Logs
+*.log
+*.out
+*.err
+
+# IDE specific files
 .vscode/
+
+# Compiled class files
+*.class
+
+# Log files
+*.log
+*.pid
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Exclude JARs
+*.jar
+*.war
+*.ear
+
+# Test Results
+/test-results/
+
+# Ignore generated metadata
+out/
