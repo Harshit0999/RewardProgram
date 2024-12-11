@@ -1,46 +1,85 @@
-Rewards Program API 
-This Spring Boot application provides a RESTful API to calculate and retrieve reward points earned by customers based on their purchases over a three-month period. The reward calculation is as follows:
+Rewards Program API
+Description
+This project provides a RESTful API for a retailer's rewards program. Customers earn points based on their transaction amounts, with the following rules:
 
-Reward Points Logic:
+Points Calculation:
 
-2 points are awarded for every dollar spent over $100 in a single transaction.
-1 point is awarded for every dollar spent between $50 and $100 in a single transaction.
-Example: A transaction of $120 earns 90 points (2 × $20 + 1 × $50).
-Features:
+2 points for every dollar spent above $100 in a transaction.
+1 point for every dollar spent between $50 and $100 in a transaction.
+Example: A $120 purchase = 2 × $20 + 1 × $50 = 90 points.
+Rewards Period:
 
-Calculates monthly reward points for each customer based on their transactions.
-Computes the total reward points earned over the three-month period.
-Includes a REST endpoint to retrieve the reward details for a specific customer.
-Sample Data:
-
-Customer: Harshit Gupta
-Transactions:
-2024-08-01 - $120.00
-2024-09-01 - $75.00
-2024-10-01 - $150.00
-2024-08-15 - $95.00
-2024-09-20 - $130.00
-REST Endpoint:
-
+Rewards are calculated for the past 3 months by default.
+Customizable rewards period is supported through an additional API.
+Endpoints
+1. Get Rewards for the Last 3 Months
 URL: /rewards/{customerId}
 Method: GET
+Path Variable:
+customerId (Long): The unique ID of the customer.
 Response:
+customer: The customer's name.
+monthlyRewards: A map of months to reward points earned.
+totalRewards: Total reward points earned in the last 3 months.
+Example Response:
 json
 Copy code
 {
-    "customer": "Harshit Gupta",
-    "monthlyRewards": {
-        "AUGUST": 135,
-        "SEPTEMBER": 155,
-        "OCTOBER": 240
-    },
-    "totalRewards": 530
+  "customer": "Harshit Gupta",
+  "monthlyRewards": {
+    "AUGUST": 90,
+    "SEPTEMBER": 75,
+    "OCTOBER": 105
+  },
+  "totalRewards": 270
 }
-Technology Stack:
+2. Get Rewards for a Custom Period
+URL: /rewards/{customerId}/customize
+Method: GET
+Path Variable:
+customerId (Long): The unique ID of the customer.
+Query Parameter:
+months (int, optional): The number of months to calculate rewards for (default is 3).
+Response:
+customer: The customer's name.
+monthlyRewards: A map of months to reward points earned.
+totalRewards: Total reward points earned in the specified period.
+Example Request:
+bash
+Copy code
+GET /rewards/1/customize?months=6
+Example Response:
+json
+Copy code
+{
+  "customer": "Harshit Gupta",
+  "monthlyRewards": {
+    "MAY": 80,
+    "JUNE": 120,
+    "JULY": 90,
+    "AUGUST": 95,
+    "SEPTEMBER": 75,
+    "OCTOBER": 105
+  },
+  "totalRewards": 565
+}
+Key Features-
 
--Java, Spring Boot, Spring Data JPA
--PostgreSQL database
--Global exception handling for robust API behavior.
+Calculates reward points for purchases in a three-month period or a customizable period.
+Supports real-time data fetching from a PostgreSQL database.
+Includes robust exception handling for invalid customer requests.
 
+How to Run-
 
-This application demonstrates the ability to calculate and expose customer reward points using Spring Boot while utilizing a structured database and RESTful principles.
+Set up a PostgreSQL database and update the application.yml file with the database connection details.
+Use the provided data.sql to populate initial customer and transaction data.
+Run the Spring Boot application.
+Use API testing tools like Postman or cURL to interact with the endpoints.
+
+Technology Stack-
+
+Backend: Java, Spring Boot
+Database: PostgreSQL
+Testing: JUnit, MockMvc
+
+This API provides an efficient way to manage and calculate reward points for customers based on their transaction history, making it flexible for future extensions and integrations.
